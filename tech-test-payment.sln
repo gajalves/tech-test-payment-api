@@ -5,13 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{33E97182-0091-43E7-8BC5-02F13CDE0505}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tech-test-payment.api", "src\tech-test-payment.api\tech-test-payment.api.csproj", "{61DE8B8E-5C10-4610-A019-970A254C7388}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tech-test-payment.api", "src\tech-test-payment.api\tech-test-payment.api.csproj", "{61DE8B8E-5C10-4610-A019-970A254C7388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tech-test-payment.domain", "src\tech-test-payment.domain\tech-test-payment.domain.csproj", "{B4B69DD7-EA72-4DDF-9236-EA4613DA2EC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tech-test-payment.domain", "src\tech-test-payment.domain\tech-test-payment.domain.csproj", "{B4B69DD7-EA72-4DDF-9236-EA4613DA2EC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tech-test-payment.infrastructure", "src\tech-test-payment.infrastructure\tech-test-payment.infrastructure.csproj", "{3C021681-8545-46D6-BFA8-691F6B6FFA30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tech-test-payment.infrastructure", "src\tech-test-payment.infrastructure\tech-test-payment.infrastructure.csproj", "{3C021681-8545-46D6-BFA8-691F6B6FFA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tech-test-payment.application", "src\tech-test-payment.application\tech-test-payment.application.csproj", "{8D7A5A28-1826-4926-84CB-AB6139320F7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tech-test-payment.application", "src\tech-test-payment.application\tech-test-payment.application.csproj", "{8D7A5A28-1826-4926-84CB-AB6139320F7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,7 +5,7 @@ public class Produto : EntidadeBase
     public string Nome { get; private set; }
     public decimal Preco { get; private set; }
 
-    public Produto()
+    public Produto(string v)
     { }
 
     public Produto(string nome, decimal preco)

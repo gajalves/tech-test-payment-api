@@ -7,7 +7,9 @@ namespace tech_test_payment.domain.Entities;
 public class Venda : EntidadeBase
 {    
     public VendaStatus Status { get; private set; }
-    public DateTime DataVenda { get; private set; }    
+    public DateTime DataVenda { get; private set; }
+
+    public int VendedorId { get; private set; }
     public Vendedor Vendedor { get; private set; }
 
     public List<VendaItem> VendaItems { get; private set; }

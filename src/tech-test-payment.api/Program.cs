@@ -9,8 +9,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>();
-
 builder.Services.AddInfrasctructureDependencies();
 builder.Services.AddApplicationDependencies();
 

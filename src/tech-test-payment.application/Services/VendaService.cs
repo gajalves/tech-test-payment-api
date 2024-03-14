@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using tech_test_payment.application.Dtos;
+using tech_test_payment.application.Errors;
 using tech_test_payment.application.Interfaces;
 using tech_test_payment.domain.Entities;
 using tech_test_payment.domain.Enums;
@@ -55,31 +54,53 @@ public class VendaService : IVendaService
 
     public async Task<Result<VendaDto>> RegistrarVenda(RegistrarVendaDto venda)
     {
-        var vendedor = await _vendedorRepository.GetByIdAsync(venda.VendedorId);
+        var vendedor = await ObterVendedorAsync(venda.VendedorId);
 
         if (vendedor == null)
-            return Result.Failure<VendaDto>(new Error("VendaService.RegistrarVenda", "Vendedor informado não existe!"));
+            return Result.Failure<VendaDto>(ApplicationErrors.VendaError.VendedorNaoEncontrado);
 
+        var novaVenda = await CriarNovaVenda(vendedor, venda.Items);
+        if (novaVenda.IsFailure)
+            return Result.Failure<VendaDto>(novaVenda.Error);
+
+        var vendaCriada = await SalvarNovaVendaAsync(novaVenda.Value);
+
+        return _mapper.Map<VendaDto>(vendaCriada);
+    }
+
+    private async Task<Vendedor> ObterVendedorAsync(Guid vendedorId)
+    {
+        return await _vendedorRepository.GetByIdAsync(vendedorId);
+    }
+
+    private async Task<Result<Venda>> CriarNovaVenda(Vendedor vendedor, List<ItemsRegistrarVendaDto> items)
+    {
         var novaVenda = new Venda(vendedor);
 
-        foreach(var item in venda.Items)
+        foreach (var item in items)
         {
-            var produto = await _produtoRepository.GetByIdAsync(item.ProdutoId);
-            
-            if(produto == null)
-                return Result.Failure<VendaDto>(new Error("VendaService.RegistrarVenda", $"Produto ({item.ProdutoId}) informado não existe!"));
+            var produto = await ObterProdutoAsync(item.ProdutoId);
+            if (produto == null)
+                return Result.Failure<Venda>(ApplicationErrors.VendaError.ProdutoNaoEncontrado);
 
             var vendaItem = new VendaItem(novaVenda, produto, item.Quantidade, item.Preco);
-
             novaVenda.AdicionarItemNaVenda(vendaItem);
         }
 
-        var vendaValida = novaVenda.ValidarVenda();        
+        var vendaValida = novaVenda.ValidarVenda();
         if (vendaValida.IsFailure)
-            return Result.Failure<VendaDto>(vendaValida.Error);
+            return Result.Failure<Venda>(vendaValida.Error);
 
-        var vendaCriada = await _vendaRepository.CreateAsync(novaVenda);
+        return Result.Success(novaVenda);
+    }
 
-        return _mapper.Map<VendaDto>(vendaCriada);
+    private async Task<Produto> ObterProdutoAsync(Guid produtoId)
+    {
+        return await _produtoRepository.GetByIdAsync(produtoId);
+    }
+
+    private async Task<Venda> SalvarNovaVendaAsync(Venda novaVenda)
+    {
+        return await _vendaRepository.CreateAsync(novaVenda);
     }
 }

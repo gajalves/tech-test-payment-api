@@ -1,4 +1,5 @@
 ﻿using tech_test_payment.domain.Enums;
+using tech_test_payment.domain.Erros;
 using tech_test_payment.domain.Shared;
 
 namespace tech_test_payment.domain.Entities;
@@ -46,9 +47,7 @@ public class Venda : EntidadeBase
         }
         else
         {
-            return Result.Failure(new Error(
-                "Venda.AlterarStatusDaVenda",
-                $"Não é possivel alterar o status da venda de {Status.GetEnumDescription()} para {novoStatus.GetEnumDescription()}"));
+            return Result.Failure(DomainErrors.VendaError.NaoEPossivelAlterarStatus(Status.GetEnumDescription(), novoStatus.GetEnumDescription()));
         }
 
         return Result.Success();
@@ -57,9 +56,7 @@ public class Venda : EntidadeBase
     public Result ValidarVenda()
     {
         if(!VendaItems.Any())
-            return Result.Failure(new Error(
-                "Venda.ValidarVenda",
-                $"A Venda deve possuir pelo menos 1 item."));
+            return Result.Failure(DomainErrors.VendaError.VendaDevePossuirItems);
 
         return Result.Success();
     }

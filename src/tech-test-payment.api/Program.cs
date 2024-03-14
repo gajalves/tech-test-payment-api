@@ -1,15 +1,23 @@
+using tech_test_payment.application;
+using tech_test_payment.infrastructure;
+using tech_test_payment.infrastructure.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ApplicationDbContext>();
+
+builder.Services.AddInfrasctructureDependencies();
+builder.Services.AddApplicationDependencies();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.Services.EnsureDbCreated();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

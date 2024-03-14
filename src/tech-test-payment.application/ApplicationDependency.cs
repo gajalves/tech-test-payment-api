@@ -23,5 +23,7 @@ public static class ApplicationDependency
     private static void AddService(IServiceCollection services)
     {
         services.AddTransient<IProdutoService, ProdutoService>();        
+        services.AddTransient<IVendedorService, VendedorService>();        
+        services.AddTransient<IVendaService, VendaService>();        
     }
 }

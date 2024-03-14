@@ -2,7 +2,7 @@
 
 namespace tech_test_payment.application.Interfaces;
 
-public interface IProdutoService
+public interface IVendedorService
 {
-    Task<List<ProdutoDto>> ListarTodosOsProdutos();
+    Task<List<VendedorDto>> ListarTodosOsVendedores();
 }

@@ -5,13 +5,13 @@ namespace tech_test_payment.domain.Entities;
 public class VendaItem
 {
     [JsonIgnore]
-    public int VendaId { get; set; }
+    public Guid VendaId { get; set; }
 
     [JsonIgnore]
     public Venda Venda { get; private set; }
 
     [JsonIgnore]
-    public int ProdutoId { get; set; }
+    public Guid ProdutoId { get; set; }
 
 
     public Produto Produto { get; private set; }

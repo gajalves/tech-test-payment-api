@@ -5,4 +5,6 @@ namespace tech_test_payment.domain.Interfaces;
 public interface IVendedorRepository
 {
     Task<List<Vendedor>> GetAllAsync();
+
+    Task<Vendedor> GetByIdAsync(Guid id);
 }

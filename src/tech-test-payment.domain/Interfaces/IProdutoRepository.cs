@@ -5,4 +5,6 @@ namespace tech_test_payment.domain.Interfaces;
 public interface IProdutoRepository
 {
     Task<List<Produto>> GetAllAsync();
+
+    Task<Produto> GetByIdAsync(Guid id);
 }

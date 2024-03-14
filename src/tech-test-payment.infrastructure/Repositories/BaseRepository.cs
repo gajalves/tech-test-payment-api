@@ -18,4 +18,14 @@ internal abstract class BaseRepository<T> where T : EntidadeBase
     {
         return await _context.Set<T>().AsNoTracking().ToListAsync();
     }
+
+    public async Task<T> GetByIdAsync(Guid id)
+    {
+        return await _context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
+    }
+
+    public async Task SaveAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
 }

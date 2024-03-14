@@ -13,4 +13,9 @@ public static class EnumHelper
         }
         throw new ArgumentException("Item not found.", nameof(enumValue));
     }
+
+    public static bool EnumIsDefinedByType(Type enumType, object value)
+    {
+        return Enum.IsDefined(enumType, value);
+    }
 }

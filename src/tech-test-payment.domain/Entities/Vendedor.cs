@@ -11,7 +11,16 @@ public class Vendedor : EntidadeBase
     { }
 
     public Vendedor(string cpf, string nome, string email, string telefone)
+    {        
+        CPF = cpf;
+        Nome = nome;
+        Email = email;
+        Telefone = telefone;
+    }
+
+    public Vendedor(Guid id, string cpf, string nome, string email, string telefone)
     {
+        Id = id;
         CPF = cpf;
         Nome = nome;
         Email = email;

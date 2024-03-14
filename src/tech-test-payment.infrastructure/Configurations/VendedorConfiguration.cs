@@ -34,10 +34,10 @@ internal class VendedorConfiguration : IEntityTypeConfiguration<Vendedor>
     private void SeedData(EntityTypeBuilder<Vendedor> builder)
     {
         builder.HasData(
-            new Vendedor("22700534000", "Bauner", "Bauner@mail.com", "2857-2450"),
-            new Vendedor("79425953074", "Flefle", "Flefle@mail.com", "3057-1871"),
-            new Vendedor("69651860030", "Cilis", "Cilis@mail.com", "3057-1871"),
-            new Vendedor("65240550042", "Zusie", "Zusie@mail.com", "2969-9313"),            
-            new Vendedor("55843128008", "Dael", "Dael@mail.com", "2175-1463"));
+            new Vendedor(new Guid("aef8bedf-cccc-4670-83ac-fa00a75dc3f5"), "22700534000", "Bauner", "Bauner@mail.com", "2857-2450"),
+            new Vendedor(new Guid("fdfd3b36-d5e3-45ed-97fc-e355920502a6"), "79425953074", "Flefle", "Flefle@mail.com", "3057-1871"),
+            new Vendedor(new Guid("dc56cc05-58aa-46f8-870e-0f03ef0d5c9a"), "69651860030", "Cilis", "Cilis@mail.com", "3057-1871"),
+            new Vendedor(new Guid("2326cbf7-3fdf-4b28-894b-f8bb8ffd73e5"), "65240550042", "Zusie", "Zusie@mail.com", "2969-9313"),            
+            new Vendedor(new Guid("1b7d884f-f7ac-4814-b888-ffdf6780b552"), "55843128008", "Dael", "Dael@mail.com", "2175-1463"));
     }
 }

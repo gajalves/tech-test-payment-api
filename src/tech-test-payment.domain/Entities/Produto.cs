@@ -13,4 +13,12 @@ public class Produto : EntidadeBase
         Nome = nome;
         Preco = preco;
     }
+
+    
+    public Produto(Guid id, string nome, decimal preco)
+    {
+        Id = id;
+        Nome = nome;
+        Preco = preco;
+    }
 }

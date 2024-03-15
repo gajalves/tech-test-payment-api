@@ -81,7 +81,7 @@ public class CriarVendaServiceTests
     }
 
     [Fact]
-    public async Task Deve_Retornar_Erro_Quando_Nao_Venda_Nao_Apresentar_Items()
+    public async Task Deve_Retornar_Erro_Quando_A_Venda_Nao_Apresentar_Items()
     {
         //Arrange
         var vendaDto = new RegistrarVendaDto

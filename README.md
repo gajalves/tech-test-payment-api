@@ -33,3 +33,8 @@
 - Boas práticas e princípios como SOLID, DDD (opcional), DRY, KISS;
 - Testes unitários;
 - Uso correto do padrão REST;
+
+## NOTAS DO AUTOR
+- Adicionado coleção do postman para facilitar a realização dos testes;
+- Junto aos arquivos de Configuration de Produto e Vendedor foram adicionados seeds para teste.
+- :)

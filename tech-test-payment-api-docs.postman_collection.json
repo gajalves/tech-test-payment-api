@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "ed56a1ab-6510-4c9b-a3db-8e9c0462f27a",
+		"name": "tech-test-payment-api-docs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10061130"
+	},
+	"item": [
+		{
+			"name": "Listar todos os produtos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/produtos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"produtos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obter venda por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/vendas/e46d3e38-9d97-4065-8633-2e7468392256",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendas",
+						"e46d3e38-9d97-4065-8633-2e7468392256"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos os vendedores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/vendedores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendedores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar venda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"vendedorId\": \"2326cbf7-3fdf-4b28-894b-f8bb8ffd73e5\",\r\n  \"items\": [\r\n    {\r\n      \"produtoId\": \"bcb16fb2-a547-4c48-86ea-0fd6ee2604e4\",\r\n      \"quantidade\": 1,\r\n      \"preco\": 24.98\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/vendas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar status da venda",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/vendas/e46d3e38-9d97-4065-8633-2e7468392256",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"vendas",
+						"e46d3e38-9d97-4065-8633-2e7468392256"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

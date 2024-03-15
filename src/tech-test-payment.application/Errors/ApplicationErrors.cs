@@ -17,5 +17,20 @@ public static class ApplicationErrors
         public static readonly Error VendaNaoEncontradaAtualizarStatus = new Error(
             "VendaService.AtualizarStatusVenda",
             "Venda não encontrada!");
+
+        public static Error NaoEPossivelAlterarStatus(string statusOrigem, string statusDestino) => new Error(
+            "Venda.AlterarStatusDaVenda",
+            $"Não é possivel alterar o status da venda de {statusOrigem} para {statusDestino}");
+    }
+
+    public static class StatusVendaError
+    {       
+        public static Error NaoEPossivelAlterarStatus(string statusOrigem, string statusDestino) => new Error(
+            "Venda.AlterarStatusDaVenda",
+            $"Não é possivel alterar o status da venda de {statusOrigem} para {statusDestino}");
+
+        public static Error StatusInformadoNaoExiste = new Error(
+            "VendaService.AtualizarStatusVenda",
+            "Status informado não existe!");
     }
 }

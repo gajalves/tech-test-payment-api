@@ -2,6 +2,7 @@
 using tech_test_payment.application.Dtos;
 using tech_test_payment.application.Errors;
 using tech_test_payment.application.Interfaces;
+using tech_test_payment.application.Interfaces.AtualizarStatusVendaStrategy;
 using tech_test_payment.domain.Entities;
 using tech_test_payment.domain.Enums;
 using tech_test_payment.domain.Interfaces;
@@ -12,12 +13,15 @@ namespace tech_test_payment.application.Services;
 public class AtualizarStatusVendaService : IAtualizarStatusVendaService
 {
     private readonly IMapper _mapper;
-    private readonly IVendaRepository _vendaRepository;    
+    private readonly IVendaRepository _vendaRepository;
+    private readonly ISelecionadorDeAlteracaoDeStatusDaVenda _selecionadorDeAlteracaoDeStatusDaVenda;
 
-    public AtualizarStatusVendaService(IMapper mapper, IVendaRepository vendaRepository)
+    public AtualizarStatusVendaService(IMapper mapper, IVendaRepository vendaRepository, 
+                                       ISelecionadorDeAlteracaoDeStatusDaVenda selecionadorDeAlteracaoDeStatusDaVenda)
     {
         _mapper = mapper;
-        _vendaRepository = vendaRepository;        
+        _vendaRepository = vendaRepository;
+        _selecionadorDeAlteracaoDeStatusDaVenda = selecionadorDeAlteracaoDeStatusDaVenda;
     }
 
     public async Task<Result<VendaDto>> AtualizarStatusVenda(Guid vendaId, AtualizarStatusVendaDto novoStatus)
@@ -46,13 +50,25 @@ public class AtualizarStatusVendaService : IAtualizarStatusVendaService
 
     private Result AlterarStatusVenda(Venda venda, VendaStatus novoStatus)
     {
-        if (!EnumHelper.EnumIsDefinedByType(typeof(VendaStatus), novoStatus))
-            return Result.Failure<VendaDto>(new Error("VendaService.AtualizarStatusVenda", "Status informado não existe!"));
+        var statusInformadoExiste = StatusInformadoExiste(novoStatus);
+        if(!statusInformadoExiste)
+            return Result.Failure<VendaDto>(ApplicationErrors.StatusVendaError.StatusInformadoNaoExiste);
 
-        var statusFoiAlterado = venda.AlterarStatusDaVenda(novoStatus);
+        var atualizador = _selecionadorDeAlteracaoDeStatusDaVenda.Selecionar(venda.Status);
+        if (atualizador == null)
+            return Result.Failure(
+                ApplicationErrors.StatusVendaError
+                    .NaoEPossivelAlterarStatus(venda.Status.GetEnumDescription(), novoStatus.GetEnumDescription()));
+
+        var statusFoiAlterado = atualizador.AlterarStatusDaVenda(venda, novoStatus);   
         if (statusFoiAlterado.IsFailure)
             return Result.Failure(statusFoiAlterado.Error);
 
         return Result.Success();
+    }
+
+    private bool StatusInformadoExiste(VendaStatus novoStatus)
+    {
+        return EnumHelper.EnumIsDefinedByType(typeof(VendaStatus), novoStatus);            
     }
 }

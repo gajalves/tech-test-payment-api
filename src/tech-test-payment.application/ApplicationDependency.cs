@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using tech_test_payment.application.Interfaces;
+using tech_test_payment.application.Interfaces.AtualizarStatusVendaStrategy;
 using tech_test_payment.application.Services;
+using tech_test_payment.application.Services.AtualizarStatusVendaStrategy;
 
 namespace tech_test_payment.application;
 
@@ -26,6 +28,16 @@ public static class ApplicationDependency
         services.AddTransient<IVendedorService, VendedorService>();        
         services.AddTransient<IObterVendaService, ObterVendaService>();        
         services.AddTransient<ICriarVendaService, CriarVendaService>();        
-        services.AddTransient<IAtualizarStatusVendaService, AtualizarStatusVendaService>();        
+        services.AddTransient<IAtualizarStatusVendaService, AtualizarStatusVendaService>();
+
+        services.AddTransient<ISelecionadorDeAlteracaoDeStatusDaVenda>(s =>
+            new SelecionadorDeAlteracaoDeStatusDaVenda(
+                new List<IAtualizarStatusVenda>
+                {
+                    new AtualizarStatusAguardandoPagamento(),
+                    new AtualizarStatusPagamentoAprovado(),
+                    new AtualizarStatusEnviadoParaTransportadora(),
+                })
+        );
     }
 }

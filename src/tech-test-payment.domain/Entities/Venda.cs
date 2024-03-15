@@ -32,25 +32,9 @@ public class Venda : EntidadeBase
         VendaItems.Add(item);
     }
 
-    public Result AlterarStatusDaVenda(VendaStatus novoStatus)
+    public void AlterarStatus(VendaStatus novoStatus)
     {
-        var possiveisTransicoesDeStatus = new Dictionary<VendaStatus, List<VendaStatus>>
-        {
-            { VendaStatus.AguardandoPagamento, new List<VendaStatus> { VendaStatus.PagamentoAprovado, VendaStatus.Cancelada } },
-            { VendaStatus.PagamentoAprovado, new List<VendaStatus> { VendaStatus.EnviadoParaTransportadora, VendaStatus.Cancelada } },
-            { VendaStatus.EnviadoParaTransportadora, new List<VendaStatus> { VendaStatus.Entregue } }
-        };
-
-        if(possiveisTransicoesDeStatus.TryGetValue(Status, out var estadosPermitidos) && estadosPermitidos.Contains(novoStatus))
-        {
-            Status = novoStatus;
-        }
-        else
-        {
-            return Result.Failure(DomainErrors.VendaError.NaoEPossivelAlterarStatus(Status.GetEnumDescription(), novoStatus.GetEnumDescription()));
-        }
-
-        return Result.Success();
+        Status = novoStatus;
     }
 
     public Result ValidarVenda()

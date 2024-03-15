@@ -24,6 +24,8 @@ public static class ApplicationDependency
     {
         services.AddTransient<IProdutoService, ProdutoService>();        
         services.AddTransient<IVendedorService, VendedorService>();        
-        services.AddTransient<IVendaService, VendaService>();        
+        services.AddTransient<IObterVendaService, ObterVendaService>();        
+        services.AddTransient<ICriarVendaService, CriarVendaService>();        
+        services.AddTransient<IAtualizarStatusVendaService, AtualizarStatusVendaService>();        
     }
 }

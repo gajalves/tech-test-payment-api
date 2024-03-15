@@ -8,17 +8,23 @@ namespace tech_test_payment.api.Controllers
     [ApiController]
     public class VendasController : ControllerBase
     {
-        private readonly IVendaService _vendaService;
+        private readonly IObterVendaService _obterVendaService;
+        private readonly ICriarVendaService _criarVendaService;
+        private readonly IAtualizarStatusVendaService _atualizarStatusVendaService;
 
-        public VendasController(IVendaService vendaService)
+        public VendasController(IObterVendaService obterVendaService, 
+                                ICriarVendaService criarVendaService, 
+                                IAtualizarStatusVendaService atualizarStatusVendaService)
         {
-            _vendaService = vendaService;
+            _obterVendaService = obterVendaService;
+            _criarVendaService = criarVendaService;
+            _atualizarStatusVendaService = atualizarStatusVendaService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] RegistrarVendaDto dto)
         {
-            var result = await _vendaService.RegistrarVenda(dto);
+            var result = await _criarVendaService.RegistrarVenda(dto);
 
             if (result.IsFailure)
                 return BadRequest(result.Error);
@@ -29,7 +35,7 @@ namespace tech_test_payment.api.Controllers
         [HttpGet("{id}")]        
         public async Task<IActionResult> Get(Guid id)
         {
-            var result = await _vendaService.ObterVendaPorId(id);
+            var result = await _obterVendaService.ObterVendaPorId(id);
 
             if (result == null)
                 return NotFound();
@@ -40,7 +46,7 @@ namespace tech_test_payment.api.Controllers
         [HttpPatch("{id}")]
         public async Task<IActionResult> PatchStatus(Guid id, AtualizarStatusVendaDto dto)
         {
-            var result = await _vendaService.AtualizarStatusVenda(id, dto);
+            var result = await _atualizarStatusVendaService.AtualizarStatusVenda(id, dto);
 
             if (result.IsFailure)
                 return BadRequest(result.Error);

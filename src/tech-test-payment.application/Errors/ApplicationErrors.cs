@@ -13,5 +13,9 @@ public static class ApplicationErrors
         public static readonly Error ProdutoNaoEncontrado = new Error(
             "VendaService.RegistrarVenda",
             "Produto informado não encontrado!");
+
+        public static readonly Error VendaNaoEncontradaAtualizarStatus = new Error(
+            "VendaService.AtualizarStatusVenda",
+            "Venda não encontrada!");
     }
 }
